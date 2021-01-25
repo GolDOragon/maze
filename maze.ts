@@ -37,7 +37,7 @@ export const isExit = (maze: Maze, coords: Coords): boolean => {
 export const selectMove = (
   maze: Maze,
   currentCoords: Coords,
-  currentDirection: Direction = null
+  currentDirection: Direction = "North"
 ): [Direction, Coords] => {
   const dirs: Array<Direction> = ["North", "East", "South", "West"];
   const nearestCells = [
@@ -47,26 +47,21 @@ export const selectMove = (
     { x: currentCoords.x - 1, y: currentCoords.y },
   ] as Array<Coords>;
 
-  let reverseDirection = null;
-  if (currentDirection) {
-    const index = dirs.indexOf(currentDirection) + 2;
-    reverseDirection = dirs[index] || dirs[index - dirs.length];
-  }
+  const index = dirs.indexOf(currentDirection);
+  const forward = currentDirection;
+  const right = dirs[index + 1] || dirs[0];
+  const left = dirs[index - 1] || dirs[dirs.length - 1];
+  const back = dirs[index + 2] || dirs[dirs.length - index];
 
   let nextCell;
-  let nextDirection = currentDirection;
-  let isFirstCircle = true;
-  while (!isCellFree(nextCell, maze)) {
-    nextDirection = dirs[dirs.indexOf(nextDirection) + 1] || dirs[0];
-
-    if (nextDirection === currentDirection) {
-      isFirstCircle = false;
+  let nextDirection;
+  for (let dir of [right, forward, left, back]) {
+    nextCell = nearestCells[dirs.indexOf(dir)];
+    if (isCellFree(nextCell, maze)) {
+      nextDirection = dir;
+      break;
     }
-    if (nextDirection === reverseDirection && isFirstCircle) continue;
-
-    nextCell = nearestCells[dirs.indexOf(nextDirection)];
   }
-
   return [nextDirection, nextCell];
 };
 
