@@ -1,4 +1,4 @@
-import { Coords, Direction, selectMove } from "./maze";
+import { Coords, Direction, selectMove } from "../maze";
 
 describe("selectMove", () => {
   const X = false;

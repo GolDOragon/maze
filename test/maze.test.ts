@@ -1,4 +1,4 @@
-import walk from "./maze";
+import walk from "../maze";
 
 describe("Maze", () => {
   const X = false;

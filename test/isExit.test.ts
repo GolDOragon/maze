@@ -1,4 +1,4 @@
-import { isExit } from "./maze";
+import { isExit } from "../maze";
 
 describe("isExit", () => {
   const X = false;
