@@ -1,15 +1,3 @@
-const X = false; // wall
-const _ = true; // pass
-const maze = [
-  [X, X, X, X, _, X, X, X, X],
-  [X, _, X, _, _, X, _, _, X],
-  [X, _, X, X, _, X, _, X, X],
-  [_, _, X, _, _, _, _, X, _],
-  [X, _, X, _, X, _, X, X, X],
-  [X, _, _, _, X, _, _, _, X],
-  [X, X, X, X, X, X, X, X, X],
-];
-
 const isCellFree = (coords: Coords, maze: Maze): boolean => {
   if (!coords || !maze[coords.y] || !maze[coords.y][coords.x]) {
     return false;
